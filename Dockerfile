@@ -27,10 +27,13 @@ COPY download_model.sh .
 COPY .env.example .
 
 # Create necessary directories
-RUN mkdir -p models logs
+RUN mkdir -p models
 
 # Make script executable
 RUN chmod +x download_model.sh
+
+# Download Whisper model
+RUN ./download_model.sh
 
 # Run bot
 CMD ["python", "src/bot.py"]
