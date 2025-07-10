@@ -1,5 +1,5 @@
 <p style="text-align:center;" align="center">
-  <img align="center" src="https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/refs/heads/main/logo-promo.png" alt="TranscriberXBOT" width="320px" height="320px"/>
+  <img align="center" src="https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/refs/heads/main/logo.png" alt="TranscriberXBOT" width="320px" height="320px"/>
 </p>
 <h1 align="center">🎙️ Whisper Transcriber Bot</h1>
 <div align="center">
@@ -30,6 +30,10 @@
 - 🐳 **Docker Ready** - Easy deployment with containerization
 - 🔒 **Privacy Focused** - Process audio locally, complete data privacy
 - 💰 **Cost Effective** - Ultra-low resource usage, perfect for budget hosting
+
+## 🎬 Demo
+
+<img src="https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/refs/heads/main/demo.gif" alt="Whisper Transcriber Bot Demo" width="320px" style="border-radius: 15px; box-shadow: 0 8px 16px rgba(0,0,0,0.15);"/>
 
 ## 🚀 One-Click Deploy
 
