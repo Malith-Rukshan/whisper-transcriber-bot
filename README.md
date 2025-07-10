@@ -103,7 +103,24 @@
 
 ## 🐳 Docker Deployment
 
-### Using Docker Compose (Recommended)
+### Cloud Deployment (Recommended)
+
+Perfect for cloud platforms like Render, Railway, etc. The model is included in the image.
+
+```yaml
+version: '3.8'
+services:
+  whisper-bot:
+    image: malithrukshan/whisper-transcriber-bot:latest
+    container_name: whisper-transcriber-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+```
+
+### Local Development with Volume Mount
+
+For local development where you want to persist models between container rebuilds:
 
 ```yaml
 version: '3.8'
@@ -121,6 +138,13 @@ services:
 ### Using Docker CLI
 
 ```bash
+# Cloud deployment (model included in image)
+docker run -d \
+  --name whisper-bot \
+  -e TELEGRAM_BOT_TOKEN=your_token_here \
+  malithrukshan/whisper-transcriber-bot:latest
+
+# Local development (with volume mount)
 docker run -d \
   --name whisper-bot \
   -e TELEGRAM_BOT_TOKEN=your_token_here \
