@@ -1,0 +1,75 @@
+{
+  "name": "Whisper Transcriber Bot",
+  "description": "🎙️ Transform voice into text instantly with AI-powered transcription! Advanced Telegram bot using OpenAI Whisper for accurate speech-to-text conversion.",
+  "keywords": [
+    "telegram",
+    "bot",
+    "whisper",
+    "transcription",
+    "speech-to-text",
+    "ai",
+    "openai",
+    "python",
+    "audio",
+    "voice"
+  ],
+  "website": "https://github.com/Malith-Rukshan/whisper-transcriber-bot",
+  "repository": "https://github.com/Malith-Rukshan/whisper-transcriber-bot",
+  "logo": "https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/main/assets/logo.png",
+  "success_url": "/",
+  "stack": "heroku-22",
+  "env": {
+    "TELEGRAM_BOT_TOKEN": {
+      "description": "Your Telegram Bot Token from @BotFather",
+      "required": true
+    },
+    "WHISPER_MODEL_PATH": {
+      "description": "Path to Whisper model file",
+      "value": "models/ggml-base.en.bin",
+      "required": false
+    },
+    "WHISPER_MODEL_NAME": {
+      "description": "Whisper model name for display",
+      "value": "base.en",
+      "required": false
+    },
+    "BOT_USERNAME": {
+      "description": "Your bot username (without @)",
+      "value": "TranscriberXBOT",
+      "required": false
+    },
+    "MAX_AUDIO_SIZE_MB": {
+      "description": "Maximum audio file size in MB",
+      "value": "50",
+      "required": false
+    },
+    "SUPPORTED_FORMATS": {
+      "description": "Supported audio formats (comma-separated)",
+      "value": "mp3,m4a,wav,ogg,flac",
+      "required": false
+    },
+    "LOG_LEVEL": {
+      "description": "Logging level (DEBUG, INFO, WARNING, ERROR)",
+      "value": "INFO",
+      "required": false
+    }
+  },
+  "formation": {
+    "worker": {
+      "quantity": 1,
+      "size": "basic"
+    }
+  },
+  "buildpacks": [
+    {
+      "url": "heroku/python"
+    },
+    {
+      "url": "https://github.com/jonathanong/heroku-buildpack-ffmpeg-latest.git"
+    }
+  ],
+  "addons": [],
+  "scripts": {
+    "postdeploy": "chmod +x download_model.sh && ./download_model.sh"
+  }
+}

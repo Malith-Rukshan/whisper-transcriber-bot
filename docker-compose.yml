@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  whisper-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: whisper-transcriber-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - WHISPER_MODEL_PATH=models/ggml-base.en.bin
+      - LOG_LEVEL=INFO
+    volumes:
+      - ./models:/app/models
+    networks:
+      - whisper-network
+
+networks:
+  whisper-network:
+    driver: bridge

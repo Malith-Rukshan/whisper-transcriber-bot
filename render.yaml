@@ -1,0 +1,34 @@
+services:
+  - type: web
+    name: whisper-transcriber-bot
+    env: python
+    plan: starter
+    buildCommand: |
+      pip install -r requirements.txt &&
+      chmod +x download_model.sh &&
+      ./download_model.sh
+    startCommand: python src/bot.py
+    envVars:
+      - key: TELEGRAM_BOT_TOKEN
+        sync: false
+      - key: WHISPER_MODEL_PATH
+        value: models/ggml-base.en.bin
+      - key: WHISPER_MODEL_NAME
+        value: base.en
+      - key: BOT_USERNAME
+        value: TranscriberXBOT
+      - key: MAX_AUDIO_SIZE_MB
+        value: "50"
+      - key: SUPPORTED_FORMATS
+        value: mp3,m4a,wav,ogg,flac
+      - key: LOG_LEVEL
+        value: INFO
+    disk:
+      name: whisper-models
+      mountPath: /opt/render/project/src/models
+      sizeGB: 2
+    autoDeploy: true
+    healthCheckPath: /health
+    preDeployCommand: |
+      apt-get update &&
+      apt-get install -y ffmpeg cmake build-essential pkg-config wget
