@@ -11,7 +11,7 @@ class Config:
     BOT_USERNAME = os.getenv("BOT_USERNAME", "TranscriberXBOT")
 
     # Whisper Model Settings
-    WHISPER_MODEL_PATH = os.getenv("WHISPER_MODEL_PATH", "../models/ggml-base.en.bin")
+    WHISPER_MODEL_PATH = os.getenv("WHISPER_MODEL_PATH", "models/ggml-base.en.bin")
     WHISPER_MODEL_NAME = os.getenv("WHISPER_MODEL_NAME", "base.en")
 
     # Bot Limits
