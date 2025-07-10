@@ -31,6 +31,15 @@
 - 🔒 **Privacy Focused** - Process audio locally, complete data privacy
 - 💰 **Cost Effective** - Ultra-low resource usage, perfect for budget hosting
 
+## 🚀 One-Click Deploy
+
+[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
+</br>
+[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Malith-Rukshan/whisper-transcriber-bot/tree/main)
+
+*Deploy instantly to your favorite cloud platform with pre-configured settings! All platforms support CPU-only deployment - no GPU needed!*
+
 ## 📝 Quick Start
 
 ### Prerequisites
@@ -87,14 +96,6 @@
 - **Voice Messages** - Direct Telegram voice notes
 - **Audio Files** - MP3, M4A, WAV, OGG, FLAC (up to 50MB)
 - **Document Audio** - Audio files sent as documents
-
-## 🚀 One-Click Deploy
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy)
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy)
-[![Deploy to DO](https://www.deploytodo.com/do-btn-blue.svg)](https://cloud.digitalocean.com/apps/new?repo=https://github.com/Malith-Rukshan/whisper-transcriber-bot/tree/main)
-
-*Deploy instantly to your favorite cloud platform with pre-configured settings! All platforms support CPU-only deployment - no GPU needed!*
 
 ## 🐳 Docker Deployment
 
