@@ -11,7 +11,28 @@ class Config:
     BOT_USERNAME = os.getenv("BOT_USERNAME", "TranscriberXBOT")
 
     # Whisper Model Settings
-    WHISPER_MODEL_PATH = os.getenv("WHISPER_MODEL_PATH", "models/ggml-base.en.bin")
+    @classmethod
+    def get_model_path(cls):
+        """Get the correct model path based on current working directory"""
+        env_path = os.getenv("WHISPER_MODEL_PATH")
+        if env_path:
+            return env_path
+        
+        # Try different possible paths
+        possible_paths = [
+            "models/ggml-base.en.bin",      # Docker container
+            "../models/ggml-base.en.bin",   # Running from src/
+            "./models/ggml-base.en.bin",    # Running from root
+        ]
+        
+        for path in possible_paths:
+            if os.path.exists(path):
+                return path
+        
+        # Default to the first path if none exist
+        return possible_paths[0]
+    
+    WHISPER_MODEL_PATH = get_model_path.__func__()
     WHISPER_MODEL_NAME = os.getenv("WHISPER_MODEL_NAME", "base.en")
 
     # Bot Limits
