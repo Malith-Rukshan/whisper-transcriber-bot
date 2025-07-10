@@ -55,3 +55,13 @@ jobs:
           BUILD_DATE=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
           VCS_REF=${{ github.sha }}
           VERSION=${{ steps.version.outputs.version }}
+    
+    - name: Update Docker Hub Description
+      uses: peter-evans/dockerhub-description@v4
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+        repository: ${{ env.IMAGE_NAME }}
+        short-description: >-
+          🎙️ AI-powered Telegram bot for voice-to-text transcription using OpenAI Whisper. CPU-only, no GPU required, privacy-focused with local processing.
+        readme-filepath: ./README.md
