@@ -50,6 +50,22 @@ class Config:
             raise ValueError("TELEGRAM_BOT_TOKEN is required")
         # Check if the downloaded model file exists
         if not os.path.exists(cls.WHISPER_MODEL_PATH):
-            raise ValueError(
-                f"Whisper model file not found: {cls.WHISPER_MODEL_PATH}. Please run ./download_model.sh first."
-            )
+            # Provide detailed error for debugging
+            cwd = os.getcwd()
+            available_files = []
+            for root, _, files in os.walk('.'):
+                for file in files:
+                    if 'ggml-base.en.bin' in file:
+                        available_files.append(os.path.join(root, file))
+            
+            error_msg = f"""
+Whisper model file not found: {cls.WHISPER_MODEL_PATH}
+Current working directory: {cwd}
+Available model files found: {available_files or 'None'}
+
+Troubleshooting:
+1. For Docker: Ensure 'RUN ./download_model.sh' is in Dockerfile
+2. For local: Run './download_model.sh' to download model
+3. Check WHISPER_MODEL_PATH environment variable
+"""
+            raise ValueError(error_msg)
