@@ -1,5 +1,5 @@
 <p style="text-align:center;" align="center">
-  <img align="center" src="https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/refs/heads/main/logo-promo.png" alt="ThumbGen" width="320px" height="320px"/>
+  <img align="center" src="https://raw.githubusercontent.com/Malith-Rukshan/whisper-transcriber-bot/refs/heads/main/logo-promo.png" alt="TranscriberXBOT" width="320px" height="320px"/>
 </p>
 <h1 align="center">🎙️ Whisper Transcriber Bot</h1>
 <div align="center">
