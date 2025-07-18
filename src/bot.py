@@ -28,6 +28,9 @@ logging.basicConfig(
 )
 logger = logging.getLogger(__name__)
 
+# Avoid all GET and POST requests being logged
+logging.getLogger("httpx").setLevel(logging.WARNING)
+
 
 class TranscriberBot:
     def __init__(self):
