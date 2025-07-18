@@ -10,18 +10,18 @@ def get_model_path():
     env_path = os.getenv("WHISPER_MODEL_PATH")
     if env_path:
         return env_path
-    
+
     # Try different possible paths
     possible_paths = [
-        "models/ggml-base.en.bin",      # Docker container
-        "../models/ggml-base.en.bin",   # Running from src/
-        "./models/ggml-base.en.bin",    # Running from root
+        "models/ggml-base.en.bin",  # Docker container
+        "../models/ggml-base.en.bin",  # Running from src/
+        "./models/ggml-base.en.bin",  # Running from root
     ]
-    
+
     for path in possible_paths:
         if os.path.exists(path):
             return path
-    
+
     # Default to the first path if none exist
     return possible_paths[0]
 
@@ -53,11 +53,11 @@ class Config:
             # Provide detailed error for debugging
             cwd = os.getcwd()
             available_files = []
-            for root, _, files in os.walk('.'):
+            for root, _, files in os.walk("."):
                 for file in files:
-                    if 'ggml-base.en.bin' in file:
+                    if "ggml-base.en.bin" in file:
                         available_files.append(os.path.join(root, file))
-            
+
             error_msg = f"""
 Whisper model file not found: {cls.WHISPER_MODEL_PATH}
 Current working directory: {cwd}
