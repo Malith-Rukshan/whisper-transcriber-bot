@@ -3,7 +3,7 @@ FROM python:3.11-slim
 # Metadata
 LABEL maintainer="Malith Rukshan <contact@malith.dev>"
 LABEL description="Whisper Transcriber Bot - AI-powered audio to text conversion for Telegram"
-LABEL version="1.0.0"
+LABEL version="1.0.1"
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
