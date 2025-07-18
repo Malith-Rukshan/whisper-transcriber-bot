@@ -220,14 +220,15 @@ Give us a ⭐ on GitHub if you find this useful!
                 return
 
             # Transcribe audio
-            transcription = await self.transcriber.transcribe_audio(file_path)
+            result = await self.transcriber.transcribe_audio(file_path)
 
             # Send result
-            if transcription:
-                formatted_text = format_transcription(transcription)
+            if result:
+                transcription, processing_time = result
+                formatted_text = format_transcription(transcription, processing_time)
                 await send_long_message(update, formatted_text, processing_msg)
                 logger.info(
-                    f"Transcription completed for user {update.effective_user.id}"
+                    f"Transcription completed for user {update.effective_user.id} in {processing_time:.2f}s"
                 )
             else:
                 await processing_msg.edit_text(

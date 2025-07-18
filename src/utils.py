@@ -45,8 +45,8 @@ def cleanup_temp_file(file_path: str):
         logger.error(f"Failed to cleanup temp file {file_path}: {e}")
 
 
-def format_transcription(text: str) -> str:
-    """Format transcription text for better readability"""
+def format_transcription(text: str, processing_time: float = None) -> str:
+    """Format transcription text for better readability with timing info"""
     if not text:
         return "❌ No speech detected in audio"
 
@@ -55,7 +55,24 @@ def format_transcription(text: str) -> str:
     if not text.endswith("."):
         text += "."
 
-    return f"📝 *Transcription:*\n\n{text}"
+    # Format timing info
+    timing_info = ""
+    if processing_time is not None:
+        timing_info = format_processing_time(processing_time)
+
+    return f"📝 *Transcription:*\n\n{text}{timing_info}"
+
+
+def format_processing_time(processing_time: float) -> str:
+    """Format processing time in human-readable format with emoji"""
+    if processing_time < 1.0:
+        return f"\n\n⏱️ *Processing time:* {processing_time:.2f}s"
+    elif processing_time < 60.0:
+        return f"\n\n⏱️ *Processing time:* {processing_time:.1f}s"
+    else:
+        minutes = int(processing_time // 60)
+        seconds = processing_time % 60
+        return f"\n\n⏱️ *Processing time:* {minutes}m {seconds:.1f}s"
 
 
 def get_file_info(file: File) -> str:

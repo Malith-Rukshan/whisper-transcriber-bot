@@ -1,7 +1,8 @@
 import logging
 import os
 import tempfile
-from typing import Optional
+import time
+from typing import Optional, Tuple
 
 from pywhispercpp.model import Model
 
@@ -44,13 +45,22 @@ class WhisperTranscriber:
             self.model = None
             raise
 
-    async def transcribe_audio(self, audio_file_path: str) -> Optional[str]:
-        """Transcribe audio file to text"""
+    async def transcribe_audio(
+        self, audio_file_path: str
+    ) -> Optional[Tuple[str, float]]:
+        """Transcribe audio file to text and return with processing time"""
         try:
             logger.info(f"Starting transcription of: {audio_file_path}")
 
+            # Start timing
+            start_time = time.time()
+
             # Transcribe audio
             segments = self.model.transcribe(audio_file_path)
+
+            # End timing
+            end_time = time.time()
+            processing_time = end_time - start_time
 
             # Combine all segments into single text
             full_text = ""
@@ -60,8 +70,10 @@ class WhisperTranscriber:
             full_text = full_text.strip()
 
             if full_text:
-                logger.info("Transcription completed successfully")
-                return full_text
+                logger.info(
+                    f"Transcription completed successfully in {processing_time:.2f}s"
+                )
+                return full_text, processing_time
             else:
                 logger.warning("Transcription returned empty result")
                 return None
