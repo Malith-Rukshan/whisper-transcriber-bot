@@ -6,7 +6,7 @@ from unittest.mock import Mock, patch
 # Add src to path
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), "..", "src"))
 
-from utils import cleanup_temp_file, format_transcription, get_file_info
+from utils import cleanup_temp_file, format_transcription, format_processing_time, get_file_info
 
 
 class TestUtils(unittest.TestCase):
@@ -29,6 +29,36 @@ class TestUtils(unittest.TestCase):
         self.assertIn("Hello world.", formatted_period)
         # Should not add double period
         self.assertNotIn("Hello world..", formatted_period)
+
+        # Test with processing time
+        text_with_time = "Hello world"
+        formatted_with_time = format_transcription(text_with_time, 1.25)
+        self.assertIn("📝 *Transcription:*", formatted_with_time)
+        self.assertIn("Hello world.", formatted_with_time)
+        self.assertIn("⏱️ *Processing time:*", formatted_with_time)
+        self.assertIn("1.2s", formatted_with_time)
+
+    def test_format_processing_time(self):
+        """Test processing time formatting"""
+        # Test sub-second time
+        formatted_sub = format_processing_time(0.85)
+        self.assertIn("⏱️ *Processing time:*", formatted_sub)
+        self.assertIn("0.85s", formatted_sub)
+
+        # Test seconds
+        formatted_sec = format_processing_time(5.7)
+        self.assertIn("⏱️ *Processing time:*", formatted_sec)
+        self.assertIn("5.7s", formatted_sec)
+
+        # Test minutes and seconds
+        formatted_min = format_processing_time(75.3)
+        self.assertIn("⏱️ *Processing time:*", formatted_min)
+        self.assertIn("1m 15.3s", formatted_min)
+
+        # Test exact minute
+        formatted_exact = format_processing_time(120.0)
+        self.assertIn("⏱️ *Processing time:*", formatted_exact)
+        self.assertIn("2m 0.0s", formatted_exact)
 
     def test_get_file_info(self):
         """Test file info extraction"""

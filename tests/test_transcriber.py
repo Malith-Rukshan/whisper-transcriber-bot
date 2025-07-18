@@ -72,7 +72,12 @@ class TestWhisperTranscriber(unittest.TestCase):
 
         result = asyncio.run(transcriber.transcribe_audio("/path/to/audio.wav"))
 
-        self.assertEqual(result, "Hello world")
+        # Result should be a tuple (text, processing_time)
+        self.assertIsInstance(result, tuple)
+        self.assertEqual(len(result), 2)
+        self.assertEqual(result[0], "Hello world")
+        self.assertIsInstance(result[1], float)
+        self.assertGreaterEqual(result[1], 0.0)
         self.mock_model.transcribe.assert_called_once_with("/path/to/audio.wav")
 
     @patch("transcriber.os.path.exists")
